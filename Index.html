@@ -1,0 +1,281 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#070b18">
+<title>Project Savi ✦</title>
+<style>
+:root{
+  --bg:#070b18;--card:#0d1528;--line:#233456;
+  --blue:#48cfff;--purple:#aa75ff;--text:#f1f5ff;
+  --muted:#9aabc8;--green:#5ef0bd
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+ margin:0;background:radial-gradient(ellipse at 80% 0%,#172653 0,transparent 40%),var(--bg);
+ color:var(--text);font-family:system-ui,-apple-system,sans-serif
+}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:2px solid white;outline-offset:3px}
+.wrap{width:min(1000px,100%);margin:auto;padding:18px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:8px 0 20px}
+.logo{font-weight:900;letter-spacing:.08em;font-size:1rem}
+.logo span{color:var(--blue)}
+.online{font-size:.72rem;color:var(--green);border:1px solid #245d55;padding:7px 11px;border-radius:30px}
+.hero{
+ position:relative;overflow:hidden;padding:35px 28px;border:1px solid #304879;
+ border-radius:23px;background:linear-gradient(120deg,#111d39,#0a1022 75%);
+}
+.hero:after{
+ content:"✦";position:absolute;right:7%;top:10%;font-size:clamp(100px,20vw,210px);
+ color:#5365e2;opacity:.09;pointer-events:none
+}
+.kicker{font-size:.7rem;font-weight:850;letter-spacing:.16em;color:var(--blue)}
+h1{font-size:clamp(2.7rem,8vw,5.5rem);letter-spacing:-.065em;line-height:.98;margin:20px 0}
+h1 span{background:linear-gradient(90deg,#bc83ff,#42d9ff);color:transparent;background-clip:text}
+p{color:var(--muted);line-height:1.65}
+.hero p{max-width:510px;font-size:1.02rem}
+.btn{
+ border:1px solid #31476b;border-radius:12px;padding:13px 17px;
+ background:#111e37;color:var(--text);font-weight:800;transition:.18s
+}
+.btn:hover{transform:translateY(-2px);border-color:var(--blue)}
+.primary{background:linear-gradient(100deg,#7772ff,#37c6ff);color:#071021;border:0}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.card{
+ background:linear-gradient(145deg,#111b32,#0b1222);
+ border:1px solid var(--line);border-radius:17px;padding:19px;min-width:0
+}
+.card-icon{font-size:1.8rem;margin-bottom:14px}
+.card h3{margin:0 0 7px;font-size:1rem}
+.card p{font-size:.84rem;margin:0 0 15px}
+.card button{width:100%;font-size:.82rem}
+.blue{color:var(--blue)}.purple{color:var(--purple)}.green{color:var(--green)}
+.feature{
+ display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;
+ background:linear-gradient(120deg,#101d38,#0b1325);
+ border:1px solid #2a4166;border-radius:20px;padding:24px;margin:14px 0
+}
+.feature h2{font-size:clamp(1.5rem,5vw,2.2rem);margin:10px 0}
+.feature p{margin-bottom:0}
+.art{
+ min-height:175px;border-radius:15px;border:1px solid #283c68;
+ background:radial-gradient(circle at 50% 45%,#233f79,#111a35 52%,#080e1c);
+ display:grid;place-items:center;position:relative;overflow:hidden
+}
+.art:before,.art:after{content:"";position:absolute;border:1px solid #4c73b8;border-radius:50%;width:140px;height:140px}
+.art:after{width:190px;height:190px;opacity:.45}
+.target{font-size:4rem;z-index:1;text-shadow:0 0 28px #49cfff}
+.art-label{position:absolute;bottom:12px;font-size:.68rem;letter-spacing:.15em;color:var(--blue);z-index:2}
+.case-art{background:radial-gradient(circle at 50% 45%,#49346e,#15162d 60%,#080e1c)}
+.case-art:before,.case-art:after{border-color:#9870d8}
+.case-art .target{color:#c5a0ff}
+.case-art .art-label{color:#c5a0ff}
+.message{
+ margin-top:15px;padding:26px;border:1px solid #344071;border-radius:20px;
+ background:linear-gradient(110deg,#151631,#0b1426);position:relative
+}
+.note{font-size:1.5rem;color:#c39bff;margin:0 0 8px}
+.message blockquote{margin:15px 0 0;color:#d7c7ff;font-size:1.15rem;line-height:1.7}
+.signature{color:var(--purple);font-weight:800}
+footer{text-align:center;color:#657695;font-size:.72rem;padding:25px 0 8px}
+.overlay{
+ position:fixed;inset:0;z-index:10;background:#020510df;backdrop-filter:blur(10px);
+ display:grid;place-items:center;padding:15px
+}
+.modal{
+ width:min(480px,100%);max-height:90dvh;overflow:auto;background:#0e172b;
+ border:1px solid #344b71;border-radius:22px;padding:23px;
+ box-shadow:0 20px 100px #0009
+}
+.modal h2{margin:10px 0}
+.modal p{font-size:.93rem}
+.option{
+ width:100%;text-align:left;background:#121f36;color:var(--text);
+ border:1px solid #2c4160;border-radius:12px;padding:14px;margin:5px 0;
+ line-height:1.45
+}
+.option:hover{border-color:var(--blue)}
+.option:disabled{cursor:default}
+.option.right{border-color:var(--green);background:#102b2a}
+.option.wrong{border-color:#ff8eaa;background:#301b2b}
+.result{padding:12px;background:#14243c;border-radius:12px;color:#d7eaff;line-height:1.6;margin-top:12px}
+.hidden{display:none!important}
+.bar{height:4px;background:#27344d;border-radius:10px;margin:16px 0;overflow:hidden}
+.bar span{display:block;width:0;height:100%;background:linear-gradient(90deg,#aa75ff,#48cfff)}
+.small{font-size:.75rem;color:#8193b3}
+@media(max-width:650px){
+ .wrap{padding:13px}
+ .hero{padding:27px 20px}
+ .cards{grid-template-columns:1fr;gap:9px}
+ .card{display:grid;grid-template-columns:42px 1fr;column-gap:10px;padding:14px}
+ .card-icon{grid-row:1/4;margin:2px 0}
+ .card h3{align-self:end}
+ .card p{margin-bottom:10px}
+ .card button{grid-column:2}
+ .feature{grid-template-columns:1fr;padding:18px;gap:15px}
+ .art{min-height:125px}
+ .feature .art{grid-row:1}
+ .actions .btn{flex:1}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav>
+ <div class="logo">◇ PROJECT <span>SAVI</span></div>
+ <div class="online">● ONLINE</div>
+</nav>
+
+<section class="hero">
+ <div class="kicker">✦ A LITTLE SOMETHING DIFFERENT</div>
+ <h1>Hey, Miss<br><span>Savito!</span></h1>
+ <p>I made this little website just for you. Nothing too serious — just a fun surprise inspired by a few things you've mentioned. Ready to explore? 😎</p>
+ <div class="actions">
+  <button class="btn primary" onclick="document.querySelector('#challenges').scrollIntoView()">Explore the surprise ↘</button>
+  <button class="btn" onclick="openMessage()">A secret message ✦</button>
+ </div>
+</section>
+
+<section id="challenges" class="cards">
+ <article class="card">
+  <div class="card-icon blue">🎮</div>
+  <h3>Blood Strike</h3>
+  <p>One quick decision. Can you make the smart move?</p>
+  <button class="btn" onclick="startGame()">Enter game ↗</button>
+ </article>
+ <article class="card">
+  <div class="card-icon purple">⌕</div>
+  <h3>Detective mode</h3>
+  <p>A tiny mystery with a clue. No experience needed.</p>
+  <button class="btn" onclick="startCase()">Open case ↗</button>
+ </article>
+ <article class="card">
+  <div class="card-icon green">✧</div>
+  <h3>Just for you</h3>
+  <p>A little note to finish the experience.</p>
+  <button class="btn" onclick="openMessage()">Read message ↗</button>
+ </article>
+</section>
+
+<section class="feature">
+ <div>
+  <div class="kicker">01 / STRIKE MODE</div>
+  <h2>Think fast.<br>Move smart.</h2>
+  <p>Your squad is counting on you. One decision stands between you and the objective.</p>
+  <div class="actions"><button class="btn primary" onclick="startGame()">Play now →</button></div>
+ </div>
+ <div class="art"><div class="target">⌖</div><div class="art-label">MISSION: SURVIVE</div></div>
+</section>
+
+<section class="feature">
+ <div class="art case-art"><div class="target">⌕</div><div class="art-label">CASE FILE / 001</div></div>
+ <div>
+  <div class="kicker purple">02 / DETECTIVE MODE</div>
+  <h2>Solve the mystery.</h2>
+  <p>Three clues. One answer. Use the evidence and trust your reasoning.</p>
+  <div class="actions"><button class="btn" onclick="startCase()">Start investigation →</button></div>
+ </div>
+</section>
+
+<section class="message">
+ <div class="note">✦ A note for Miss Savito</div>
+ <h2>Keep doing your thing.</h2>
+ <p>I know you're working toward your future, and I hope things go well with Grade 12 and whatever path you choose next.</p>
+ <p>Keep learning, keep gaming, and keep being yourself. This was just a small surprise to make you smile. 😄</p>
+ <blockquote>“Big things start with small steps.”</blockquote>
+ <p class="signature">— Your friendly neighbourhood developer 🤝</p>
+</section>
+
+<footer>PROJECT SAVI · BUILT WITH HTML, CSS & JAVASCRIPT<br>ONE LITTLE SURPRISE. ZERO PRESSURE. ✦</footer>
+</div>
+
+<div id="overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+ <div class="modal">
+  <div class="kicker" id="modalKicker">PROJECT SAVI / CHALLENGE</div>
+  <h2 id="modalTitle">Ready?</h2>
+  <p id="modalIntro"></p>
+  <div class="bar"><span id="progress"></span></div>
+  <div id="question" style="font-weight:750;line-height:1.5;margin:16px 0"></div>
+  <div id="options"></div>
+  <div id="result" class="result hidden" aria-live="polite"></div>
+  <div class="actions">
+   <button id="next" class="btn primary hidden" onclick="advance()">Continue →</button>
+   <button class="btn" onclick="closeModal()">Close</button>
+  </div>
+ </div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+let mode="",index=0,answered=false,score=0;
+
+const games=[
+ {title:"Mission briefing",intro:"You're close to the objective in Blood Strike. You hear footsteps nearby.",q:"What's your smartest move?",options:["Rush in without checking.","Use cover and check with your squad.","Run away from your squad."],correct:1,explain:"Good call! Cover and teamwork give you a better chance than rushing in blindly."},
+ {title:"Final move",intro:"Your squad spots the objective. The area might not be clear yet.",q:"How do you help the team?",options:["Communicate and move together.","Charge alone for the highlight clip.","Ignore the mission."],correct:0,explain:"Squadwork wins! Communicating and moving together is a sensible choice."}
+];
+const cases=[
+ {title:"The missing ticket",intro:"A tournament ticket has disappeared. You have three clues.",q:"Which clue should you follow first?",options:["A note says the ticket was moved to keep it dry.","Someone nearby looks suspicious.","Guess who took it."],correct:0,explain:"The note gives you an actual lead. Follow evidence before accusing anyone."},
+ {title:"The switched bags",intro:"Two identical bags are beside the door. Someone thinks they have the wrong one.",q:"What's the best first step?",options:["Blame the nearest person.","Check the name tag inside the bag.","Guess based on the bags' colours."],correct:1,explain:"The name tag gives you useful information. A good investigator checks facts first."}
+];
+
+function showModal(){ $("overlay").classList.remove("hidden");document.body.style.overflow="hidden" }
+function closeModal(){ $("overlay").classList.add("hidden");document.body.style.overflow="" }
+function startGame(){mode="game";index=0;score=0;render()}
+function startCase(){mode="case";index=0;score=0;render()}
+function openMessage(){
+ mode="message";showModal();
+ $("modalKicker").textContent="PROJECT SAVI / SECRET MESSAGE";
+ $("modalTitle").textContent="Surprise! ✨";
+ $("modalIntro").textContent="You found the secret message. 😂";
+ $("progress").style.width="100%";
+ $("question").textContent="I remembered you play Blood Strike and mentioned criminology, so I thought I'd make you something a little different. Hope it made you smile, Miss Savito! Good luck with Grade 12 and whatever future you choose. Keep winning, in-game and outside it. 🤝";
+ $("options").innerHTML="";$("result").classList.add("hidden");$("next").classList.add("hidden");showModal()
+}
+function render(){
+ answered=false;let data=(mode==="game"?games:cases)[index];
+ $("modalKicker").textContent=mode==="game"?"STRIKE MODE / MINI CHALLENGE":"DETECTIVE MODE / CASE FILE";
+ $("modalTitle").textContent=data.title;$("modalIntro").textContent=data.intro;
+ $("progress").style.width=(index/(mode==="game"?games:cases).length*100)+"%";
+ $("question").textContent=data.q;$("options").innerHTML="";
+ $("result").classList.add("hidden");$("next").classList.add("hidden");
+ data.options.forEach((option,i)=>{
+  let b=document.createElement("button");b.className="option";
+  b.textContent=String.fromCharCode(65+i)+". "+option;
+  b.onclick=()=>answer(i,b);$("options").appendChild(b)
+ });
+ showModal()
+}
+function answer(choice,button){
+ if(answered)return;answered=true;
+ let data=(mode==="game"?games:cases)[index];
+ [...$("options").children].forEach((b,i)=>{b.disabled=true;if(i===data.correct)b.classList.add("right")});
+ if(choice===data.correct)score++;else button.classList.add("wrong");
+ $("result").textContent=(choice===data.correct?"✓ Nice choice! ":"Not quite — no worries. ")+data.explain;
+ $("result").classList.remove("hidden");
+ $("progress").style.width=((index+1)/(mode==="game"?games:cases).length*100)+"%";
+ $("next").textContent=index===(mode==="game"?games:cases).length-1?"Finish ✦":"Next →";
+ $("next").classList.remove("hidden")
+}
+function advance(){
+ if(mode==="message"){closeModal();return}
+ if(index<(mode==="game"?games:cases).length-1){index++;render()}
+ else{
+  $("modalKicker").textContent="MISSION COMPLETE";
+  $("modalTitle").textContent=mode==="game"?"Squad approved. 🎯":"Case closed. 🔎";
+  $("modalIntro").textContent="You made it! Thanks for playing, Miss Savito.";
+  $("progress").style.width="100%";
+  $("question").textContent=`You got ${score} out of ${(mode==="game"?games:cases).length} right. The real win is giving it a try. 😎`;
+  $("options").innerHTML="";$("result").classList.add("hidden");
+  $("next").textContent="Play again ↻";
+  $("next").onclick=()=>{ $("next").onclick=advance;mode==="game"?startGame():startCase() };
+ }
+}
+</script>
+</body>
+</html>
